@@ -8,6 +8,10 @@ const EffectDemo = () => {
         //just contains first arg, which is the call back funtion
         //this function will be called after render every render
         console.log("This happens with every render");
+        //clean up
+        return()=>{ 
+            console.log("this happens on unmount")
+        }
     })
 
     useEffect(()=>{
