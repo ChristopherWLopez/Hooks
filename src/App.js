@@ -21,18 +21,28 @@ const App = () => {
     // listeners
     socket.on("connect", handleConnect);
     socket.on("disconnect", handleDisconnect);
+    socket.on("response", (payload)=> console.log(payload));
 
     // clean up
 
     return ()=>{
       socket.off("connect", handleConnect);
       socket.off("disconnect", handleDisconnect);
+      socket.off(()=> console.log("response listener is off"));
     }
   });
+
+  const handleHello =()=>{
+    socket.emit("hello");
+  }
 
   return (
     <div>
       <p> Is connected{isConnected ? "true": "false"}</p>
+        <button
+          onClick={handleHello}>
+          Say Hello
+        </button>
       <EffectDemo/>
     </div>
   )
